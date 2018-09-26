@@ -1,0 +1,4 @@
+#!/usr/bin/env python
+
+import easyautoml
+easyautoml.tpot_with_ft()
