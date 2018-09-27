@@ -56,6 +56,8 @@ pip install stopit
 pip install xgboost
 pip install dask[delayed]
 pip install dask-ml
+pip install tpot
+pip install featuretools
 
 if [[ "$COVERAGE" == "true" ]]; then
     pip install coverage coveralls
@@ -72,4 +74,6 @@ python -c "import update_checker; print('update_checker %s' % update_checker.__v
 python -c "import tqdm; print('tqdm %s' % tqdm.__version__)"
 python -c "import pandas; print('pandas %s' % pandas.__version__)"
 python -c "import stopit; print('stopit %s' % stopit.__version__)"
+python -c "import tpot; print('tpot %s' % tpot.__version__)"
+python -c "import featuretools; print('featuretools %s' % featuretools.__version__)"
 python setup.py build_ext --inplace
