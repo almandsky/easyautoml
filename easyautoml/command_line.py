@@ -32,7 +32,7 @@ def main():
         'Cabin':ft.variable_types.Text
     }
 
-    #run(["kaggle", "competitions", "download", "-c", PROJECT, "-p", DATA_DIR])
+    run(["kaggle", "competitions", "download", "-c", PROJECT, "-p", DATA_DIR])
 
     easyautoml.utils.tpot_with_ft(
         project=PROJECT,
@@ -45,6 +45,6 @@ def main():
         prediction_key=PREDICTION_KEY,
         prediction_type=PREDICTION_TYPE)
 
-    #run(["kaggle", "competitions", "submit", PROJECT, "-f", SUBMIT_FILE_FT, "-m", "tpot with ft"])
+    run(["kaggle", "competitions", "submit", PROJECT, "-f", SUBMIT_FILE_FT, "-m", "tpot with ft"])
 
-    #run(["kaggle", "competitions", "submissions", PROJECT])
+    run(["kaggle", "competitions", "submissions", PROJECT])

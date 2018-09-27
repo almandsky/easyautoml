@@ -21,7 +21,7 @@ setup(name='easyautoml',
       license='MIT',
       packages=['easyautoml'],
       install_requires=[
-          'tpot==0.9.3',
+          'tpot',
           'featuretools',
           'sklearn',
           'numpy',

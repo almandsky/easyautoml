@@ -63,9 +63,22 @@ def tpot_train(
     # - regression
     # - classification
     if (prediction_type == "classification"):
-        tpot = TPOTClassifier(verbosity=2, max_time_mins=max_time_mins, max_eval_time_mins=max_eval_time_mins, population_size=population_size, scoring=scoring_func, n_jobs=n_jobs, early_stop=3)
+        tpot = TPOTClassifier(
+            verbosity=2, 
+            max_time_mins=max_time_mins, 
+            max_eval_time_mins=max_eval_time_mins, 
+            population_size=population_size, 
+            scoring=scoring_func, 
+            n_jobs=n_jobs)
     else:
-        tpot = TPOTRegressor(verbosity=2, max_time_mins=max_time_mins, max_eval_time_mins=max_eval_time_mins, population_size=population_size, scoring=scoring_func, n_jobs=n_jobs, early_stop=3)
+        tpot = TPOTRegressor(
+            verbosity=2, 
+            max_time_mins=max_time_mins, 
+            max_eval_time_mins=max_eval_time_mins, 
+            population_size=population_size, 
+            scoring=scoring_func, 
+            n_jobs=n_jobs, 
+            warm_start=True)
         
     tpot.fit(X_train, y_train)
     
@@ -84,7 +97,7 @@ def tpot_train(
 def tpot_score(
     tpot, 
     project, 
-    X, 
+    X_test, 
     index_column,
     submit_file, 
     prediction_target, 
@@ -94,12 +107,11 @@ def tpot_score(
     getdummies=False):
 
     print("==========Start scoring...")
-    
     # Generate the predictions
     if predictProba:
-        submission = tpot.predict_proba(X)[:,1]
+        submission = tpot.predict_proba(X_test)[:,1]
     else:
-        submission = tpot.predict(X)
+        submission = tpot.predict(X_test)
         
     if predictInt:
         submission = np.clip(submission.astype('int'),0,None)
@@ -117,63 +129,4 @@ def tpot_score(
         final.to_csv(submit_file, index = True)
 
     print("==========Submission shape {}".format(final.shape))
-
-
-# def tpot_with_ft(
-#     project, 
-#     train_file_name, 
-#     test_file_name, 
-#     submit_file, 
-#     export_file, 
-#     prediction_target, 
-#     prediction_key, 
-#     prediction_type, 
-#     variable_types={}, 
-#     scoring_func=None, 
-#     predictProba=False, 
-#     predictInt=False, 
-#     getdummies=False, 
-#     drop_train_columns=None, 
-#     drop_score_columns=None):
-
-#     X, y = ftutils.get_train_data(
-#         project=project, 
-#         train_file=train_file_name, 
-#         prediction_key=prediction_key, 
-#         prediction_target=prediction_target, 
-#         variable_types=variable_types, 
-#         drop_columns=drop_train_columns)
-
-#     tpot_instance = tpot_train(
-#         project=project, 
-#         X=X,
-#         y=y, 
-#         prediction_type=prediction_type, 
-#         export_file=export_file, 
-#         scoring_func=scoring_func, 
-#         max_time_mins=TPOT_MAX_TIME_MINS, 
-#         n_jobs=N_JOBS, 
-#         population_size=TPOT_POPULATION_SIZE)
-    
-
-#     X_test, index_column = ftutils.get_test_data(
-#         project=project, 
-#         testfile=test_file_name, 
-#         prediction_key=prediction_key, 
-#         prediction_target=prediction_target, 
-#         variable_types=variable_types, 
-#         drop_columns=drop_score_columns)
-
-
-#     tpot_score(
-#         tpot=tpot_instance, 
-#         project=project, 
-#         X=X_test, 
-#         index_column = index_column,
-#         prediction_target=prediction_target, 
-#         prediction_key=prediction_key, 
-#         submit_file=submit_file, 
-#         predictProba=predictProba, 
-#         predictInt=predictInt, 
-#         getdummies=getdummies)
 
