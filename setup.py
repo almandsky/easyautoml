@@ -25,8 +25,7 @@ setup(name='easyautoml',
           'featuretools',
           'sklearn',
           'numpy',
-          'pandas',
-          'subprocess'
+          'pandas'
       ],
       entry_points = {
         'console_scripts': ['easyautoml=easyautoml.command_line:main'],
