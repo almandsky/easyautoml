@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-import easyautoml
+from easyautoml import tpotutils
 
 class TestSetup(TestCase):
     def test_msele(self):
-        result = easyautoml.msele([1,2,3], [1,2,3])
+        result = tpotutils.msele([1,2,3], [1,2,3])
         self.assertTrue(result == 0.0)
