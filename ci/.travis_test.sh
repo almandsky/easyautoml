@@ -15,7 +15,6 @@ python -c "import sklearn; print('sklearn %s' % sklearn.__version__)"
 python -c "import update_checker; print('update_checker %s ' % update_checker.__version__)"
 python -c "import tpot; print('tpot %s' % tpot.__version__)"
 python -c "import featuretools; print('featuretools %s' % featuretools.__version__)"
-python -c "import subprocess; print('subprocess %s' % subprocess.__version__)"
 
 if [[ "$COVERAGE" == "true" ]]; then
     nosetests -s -v --with-coverage
