@@ -66,13 +66,8 @@ def get_train_data(
     print("==========columns are:")
     print(feature_matrix_enc.columns)
     
-    
-    print("==========features_enc are:")
-    print(features_enc)
-    
-    
     print("==========saving features to {}".format(project))
-    ft.save_features(features_enc, "data/{}/ft_features".format(project))
+    ft.save_features(feature_defs, "data/{}/ft_features".format(project))
 
     return feature_matrix_enc, train_labels
 
@@ -108,7 +103,15 @@ def get_test_data(
     
     print("==========Reading features from {}".format(project))
     saved_features = ft.load_features("data/{}/ft_features".format(project))
+
+    print("==========saved_features are:")
+    print(saved_features)
+
     feature_matrix = ft.calculate_feature_matrix(saved_features, entities)
+
+    
+    feature_matrix_enc, _ = ft.encode_features(feature_matrix, saved_features)
+
     index_column = test_data[prediction_key]
 
-    return feature_matrix, index_column
+    return feature_matrix_enc, index_column

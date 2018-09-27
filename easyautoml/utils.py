@@ -5,7 +5,7 @@ from easyautoml.tpotutils import tpot_train, tpot_score
 TPOT_MAX_TIME_MINS = 1
 TPOT_MAX_EVAL_TIME_MINS = 0.04
 TPOT_POPULATION_SIZE = 40
-N_JOBS=1
+N_JOBS=-1
 
 def tpot_with_ft(
     project, 
@@ -42,7 +42,6 @@ def tpot_with_ft(
         max_time_mins=TPOT_MAX_TIME_MINS, 
         n_jobs=N_JOBS, 
         population_size=TPOT_POPULATION_SIZE)
-    
 
     X_test, index_column = get_test_data(
         project=project, 
@@ -52,11 +51,10 @@ def tpot_with_ft(
         variable_types=variable_types, 
         drop_columns=drop_score_columns)
 
-
     tpot_score(
         tpot=tpot_instance, 
         project=project, 
-        X=X_test, 
+        X_test=X_test, 
         index_column = index_column,
         prediction_target=prediction_target, 
         prediction_key=prediction_key, 
