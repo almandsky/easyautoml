@@ -66,14 +66,9 @@ fi
 # build output in the travis output when it succeeds.
 python --version
 python -c "import numpy; print('numpy %s' % numpy.__version__)"
-python -c "import scipy; print('scipy %s' % scipy.__version__)"
 python -c "import sklearn; print('sklearn %s' % sklearn.__version__)"
-python -c "import deap; print('deap %s' % deap.__version__)"
-python -c "import xgboost; print('xgboost %s ' % xgboost.__version__)"
-python -c "import update_checker; print('update_checker %s' % update_checker.__version__)"
-python -c "import tqdm; print('tqdm %s' % tqdm.__version__)"
 python -c "import pandas; print('pandas %s' % pandas.__version__)"
-python -c "import stopit; print('stopit %s' % stopit.__version__)"
 python -c "import tpot; print('tpot %s' % tpot.__version__)"
 python -c "import featuretools; print('featuretools %s' % featuretools.__version__)"
+python -c "import subprocess; print('subprocess %s' % subprocess.__version__)"
 python setup.py build_ext --inplace
